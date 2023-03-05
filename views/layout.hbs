@@ -1,0 +1,92 @@
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Authentication</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    {{#if headerCondition}}
+      <nav class="navbar navbar-expand-lg bg-success text-light">
+        <div class="container-fluid">
+          {{#if userGloabel}}
+            <a
+              class="navbar-brand text-light fw-bold"
+              href="/"
+            >{{userGloabel.username}}</a>
+          {{else}}
+            <a class="navbar-brand text-light fw-bold" href="/">Holder</a>
+          {{/if}}
+          <button
+            class="navbar-toggler float-end"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav gap-3">
+              <li class="nav-item">
+                <a
+                  class="nav-link active text-light fw-bold"
+                  aria-current="page"
+                  href="/"
+                >Home</a>
+              </li>
+              <li class="nav-item">
+                <a
+                  class="nav-link active text-light fw-bold"
+                  aria-current="page"
+                  href="/table"
+                >Table</a>
+              </li>
+              <li class="nav-item">
+                <a
+                  class="nav-link active text-light fw-bold"
+                  aria-current="page"
+                  href="/card"
+                >Card</a>
+              </li>
+              <li class="nav-item">
+                <a
+                  class="nav-link active text-light fw-bold"
+                  aria-current="page"
+                  href="/list"
+                >List</a>
+              </li>
+
+            </ul>
+          </div>
+
+          {{#if userGloabel}}
+            <a href="/signout"><button
+                class="btn btn-dark fw-bold text-success bg-opacity-25"
+              >Sign Out</button></a>
+          {{else}}
+            <a href="/signout"><button
+                class="btn btn-dark fw-bold text-success bg-opacity-25"
+              >Sign In</button></a>
+          {{/if}}
+
+        </div>
+      </nav>
+    {{else}}
+
+    {{/if}}
+    {{{body}}}
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

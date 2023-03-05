@@ -1,0 +1,62 @@
+// middleware
+function middleware(req, res, next) {
+  console.log("Middleware : " + req.body);
+  console.log(req.body);
+  if (condition.isUserLoggedIn) {
+    next();
+  } else {
+    res.redirect("/");
+  }
+}
+
+// Sign
+router.get("/", (req, res) => {
+  console.log("Redir");
+  if (req.session.loggedIn) {
+    res.redirect("/table");
+  } else res.render("signin", { headerCondition: false });
+});
+
+router.post("/submit", (req, res) => {
+  const { username, password } = req.body;
+  if (preUser.passwordDB == password && preUser.usernameDB == username) {
+    condition.isUserLoggedIn = true;
+    req.session.loggedIn = true;
+    req.session.user = req.body;
+
+    res.redirect("/home");
+  } else {
+    res.redirect("/");
+  }
+});
+
+let headerCondition = false;
+// home page
+router.get("/home", middleware, (req, res) => {
+  console.log("iv'e Reached here");
+  let user = req.session.user;
+
+  res.render("home", { headerCondition: true, user });
+});
+
+// list page
+router.get("/list", middleware, (req, res) => {
+  console.log("render");
+  res.render("lists", { headerCondition: true });
+});
+// table page
+router.get("/table", middleware, (req, res) => {
+  res.render("table", { headerCondition: true });
+  console.log("render");
+});
+// card page
+router.get("/card", middleware, (req, res) => {
+  console.log("render");
+  res.render("cards", { headerCondition: true });
+});
+
+// signout route
+router.get("/signout", (req, res) => {
+  req.session.destroy();
+  res.redirect("/");
+});
